@@ -1,0 +1,82 @@
+1. Set category
+
+2. Based on Category, set AssetType List in Type options: 
+    AssetType[category].map(...)
+    set assetType = AsstType[category].selectedValue
+
+3. Based on AssetType value, set Vendor.
+
+4. Based on Vendor value, set Models
+
+5. ...
+
+
+Category= [
+{
+    name:'Netowrk'
+},
+{
+    name:'System'
+},
+{
+    name:'Consumables'
+}
+]
+
+Type = [
+    {
+    name: 'Firewall',
+    category: 'Network'
+    },
+    {
+    name: 'Switch',
+    category: 'Network'
+    },
+    {
+    name: 'Desktop',
+    category: 'System'
+    },
+    {
+    name: 'Laptop',
+    category: 'System'
+    }
+]
+
+vendor = [
+    {
+    name: 'Cisco',
+    type: 'Switch',
+    category: 'Network'
+    },
+    {
+    name: 'Sonicwall',
+    type: 'Firewall',
+    category: 'Network'
+    },
+    {
+    name: 'Idea Pad',
+    type: 'Laptop',
+    category: 'System'
+    },
+    {
+    name: 'Inspiron',
+    type: 'Laptop',
+    category: 'System'
+    }
+}
+]
+
+Model = [
+    {
+    name: '2960CX-8'
+    vendor: 'Cisco',
+    type: 'Switch',
+    Category: 'Network'
+    },
+     {
+    name: 'Inspiron 5558'
+    vendor: 'Dell',
+    type: 'Laptop',
+    Category: 'System'
+    }
+]

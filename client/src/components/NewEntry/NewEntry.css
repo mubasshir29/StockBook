@@ -1,0 +1,124 @@
+.form-container{
+    width: 70%;
+    margin: 20px auto;
+    border: 0px solid white ;
+    background-color: rgb(64, 48, 95);
+    border-radius: 2rem;
+    padding: 5px 0px;
+}
+h1{
+    color: white;
+    margin-top: 50px;
+}
+.additem-form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    margin: 30px 30px;
+    font-size: 16px;
+}
+
+.form-element{
+    color: white;
+    padding: 5px 10px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-element input{
+    flex-grow: 1;
+    font-size: 16px;
+    padding: 5px;
+    background-color: rgb(42, 29, 62);
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+.form-element select{
+    flex-grow: 1;
+    font-size: 15px;
+    background-color: rgb(42, 29, 62);
+    color: white;
+    outline: none;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+.form-element optgroup{
+    outline: none;
+    border: none;
+}
+
+.form-element label{
+    margin-right: 10px;
+    font-size: 16px;
+}
+.category-container{
+    width: 45%;
+}   
+.type-container{
+    width: 45%
+}
+.vendor-container{
+    width: 30%;
+}
+.model-container{
+    width: 30%;
+}
+.serial-number-container{
+    width: 30%;
+}
+.description-container{
+    width: 98%;;
+}
+.project-container{
+    width: 30%;
+}
+.date-container{
+    width: 30%;
+}
+.added-by-container{
+    width: 30%;
+}
+.attachment-container{
+    width: 98%;
+}
+.comments-container{
+    width: 98%;
+}
+
+.save-cancel-btn{
+    border: none;
+    font-size: 18px;
+    padding: 5px 20px;
+    border-radius: 5px;
+    background-color: rgb(40, 173, 133);
+    color: white;
+}
+
+.save-btn{
+    background-color: rgb(40, 173, 133);
+}
+
+.cancel-btn{
+    background-color: rgb(189, 49, 63);
+}
+input[type="file"]::file-selector-button {
+    background-color: #3c0f86;
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+  .save-cancel-container{
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }

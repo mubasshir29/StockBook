@@ -1,0 +1,122 @@
+.tab-table{
+    width: 100%;
+}
+
+.settings-container{
+    display: flex;
+    width: 50%;
+    margin: 30px auto 20px auto;
+    background-color: rgb(64, 48, 95);
+    height: 300px;
+}
+.left-panel{
+    width: 30%;
+    margin: 5px;
+    justify-content: center;
+    
+}
+.left-panel-tabs{
+    width: 100%;
+    background-color: rgb(42, 29, 62);
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    height: 100%;
+    margin: auto auto;
+    text-align: center;
+    padding: 0;
+}
+.left-panel-tabs li{
+    color: white;
+    width: 100%;
+    padding: 10px 0;
+}
+.left-panel-tabs li:hover{
+    background-color: rgb(64, 48, 95);
+    cursor: pointer;
+}
+label{
+    color: white;
+}
+
+.right-panel{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.right-panel-upper{
+    width: 100%;
+    height: 240px;
+    margin: auto auto;
+    display: flex;
+    flex-direction: column;
+    /*gap: 15px;*/
+    justify-content: space-around;
+}
+
+.right-panel-upper div{
+    width: 90%;
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 5px auto;
+}
+.right-panel-upper input{
+    width: 100%;
+    font-size: 16px;
+    padding: 5px;
+    background-color: rgb(42, 29, 62);
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+.selected{
+    background: linear-gradient(143deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 0%, rgba(60,15,134,1) 0%, rgba(125,24,191,1) 51%, rgb(105, 29, 245) 100%);
+}
+
+.save-btn{
+    border: none;
+    font-size: 18px;
+    padding: 5px 20px;
+    border-radius: 5px;
+    background: linear-gradient(143deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 0%, rgba(60,15,134,1) 0%, rgba(125,24,191,1) 51%, rgb(105, 29, 245) 100%);
+    color: white;
+}
+.save-btn:hover{
+    cursor: pointer;
+}
+.show-lists{
+    width: 50%;
+    margin: 50px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255,30%)
+}
+.show-lists div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+.show-lists h2{
+    margin: 0;
+}
+.show-lists ul{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,72 @@
+.navbar-container{
+    background: rgb(2,0,36);
+    background: linear-gradient(143deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 0%, rgba(60,15,134,1) 0%, rgba(125,24,191,1) 51%, rgb(105, 29, 245) 100%);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    position:sticky;
+}
+.navbar{
+    width: 98%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px auto;
+}
+
+.logo{
+    font-size: 30px;
+    font-weight: bold;
+    color: rgba(255, 255, 255,80%);
+}
+.nav-right{
+    display: flex;
+    gap: 5px;
+}
+
+.nav-left{
+    display: flex;
+    gap: 10px;
+}
+
+.sidebar-btn{
+    border: none;
+    font-size: 15px;
+    padding: 5px 13px;
+    border-radius: 50%;
+    background-color: rgb(121, 39, 253);
+    color: white;
+}
+
+.sidebar-btn:hover{
+    cursor: pointer;
+    box-shadow: 4px 4x 10px 4px rgb(17, 6, 36);
+    -webkit-box-shadow: 3px 3px 6px 1px rgb(17, 6, 36);
+    -moz-box-shadow: 3px -3px 6px 1px rgb(17, 6, 36);
+    box-shadow: 3px -3px 6px 1px rgba(17, 6, 36,0.3);
+}
+
+
+
+.nav-right-btn{
+    border: none;
+    font-size: 15px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #3c0f86;
+    color: rgb(255, 255, 255);
+}
+
+.add-new{
+    background-color: rgb(40, 173, 133);
+    color: white;
+}
+
+.nav-right button:hover{
+    cursor: pointer;
+    box-shadow: 4px 4x 10px 4px rgb(17, 6, 36);
+    -webkit-box-shadow: 3px 3px 6px 1px rgb(17, 6, 36);
+    -moz-box-shadow: 3px 3px 6px 1px rgb(17, 6, 36);
+    box-shadow: 3px 3px 6px 1px rgba(17, 6, 36,0.3);
+}
+
