@@ -14,13 +14,6 @@ function NewEntry() {
   const [personsOptions,setPersonOptions] = useState([])
   const [projectsOptions,setProjectsOptions] = useState([])
 
-  // const [assetCategory,setAssetCategory] = useState(AssetCategory[0].name)
-  // const [assetType,setAssetType] = useState((AssetType.find(entry => entry.category === assetCategory)).name)
-  // const [assetVendor,setAssetVendor] = useState((AssetVendors.find(entry => entry.category === assetCategory)).name)
-  // const [assetModel,setAssetModel] = useState((AssetModels.find(entry => entry.category === assetCategory)).name)
-  // const [assetProject,setAssetProject] =useState((Projects.find(entry => entry.category === assetCategory)).name)
-  // const [assetPerson,setAssetPerson] = useState((Persons.find(entry => entry.category === assetCategory)).name)
-
   const [assetCategory,setAssetCategory] = useState(AssetCategory[0].name)
   const [assetType,setAssetType] = useState((AssetType.find(entry => entry.category === assetCategory)).name)
   const [assetVendor,setAssetVendor] = useState((AssetVendors.find(entry => entry.category === assetCategory)).name)
