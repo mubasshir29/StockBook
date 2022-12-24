@@ -5,6 +5,10 @@ import AllData from '../../SampleData/AllData'
 function ListAll() {
   return (
     <div>
+      <div className='searchbox-container'>
+        <input className='searchbox' placeholder='Search keyword'></input>
+        <button className='search-go'>Go</button>
+      </div>
       <div className='table-container'>
         <table className='list-all-table'>
           <thead>

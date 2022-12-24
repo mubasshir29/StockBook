@@ -1,6 +1,37 @@
+.searchbox-container{
+    width: 90%;
+    display: flex;
+    justify-content: end;
+    margin: 50px auto 10px auto;
+    padding: 10px 0;
+    gap: 5px;
+}
+
+.searchbox{
+    font-size: 15px ;
+    color: rgba(255, 255, 255,80%);
+    background: transparent;
+    border: 2px solid rgb(100, 76, 148);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.searchbox:focus{
+    border: 2px solid rgb(40, 173, 133);
+    outline: none;
+}
+
+.search-go{
+    background-color: rgb(40, 173, 133);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
 .table-container{
     width: 90%;
-    margin: 50px auto 10px auto;
+    margin: 10px auto;
 }
 
 table{

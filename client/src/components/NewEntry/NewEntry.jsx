@@ -10,22 +10,21 @@ import {v4} from 'uuid'
 const {AssetCategory, AssetType, AssetVendors, AssetModels,Persons,Projects} = getFormData();
 
 function NewEntry() {
-  const [categoryOptoins, setCategoryOptoins] = useState([])
-  const [assetTypeOptoins, setAssetTypeOptoins] = useState([])
-  const [vendorOptoins, setVendorOptoins] = useState([])
-  const [modelOptoins, setModelOptoins] = useState([])
-  const [personsOptions,setPersonOptions] = useState([])
-  const [projectsOptions,setProjectsOptions] = useState([])
 
   const [iconFile, setIconFile] = useState(null)
   const [docFile,setDocFile] = useState(null)
 
-  const [assetCategory,setAssetCategory] = useState(AssetCategory[0].name)
-  const [assetType,setAssetType] = useState((AssetType.find(entry => entry.category === assetCategory)).name)
-  const [assetVendor,setAssetVendor] = useState((AssetVendors.find(entry => entry.category === assetCategory)).name)
-  const [assetModel,setAssetModel] = useState((AssetModels.find(entry => entry.category === assetCategory)).name)
-  const [assetProject,setAssetProject] =useState((Projects.find(entry => entry.category === assetCategory)).name)
-  const [assetPerson,setAssetPerson] = useState((Persons.find(entry => entry.category === assetCategory)).name)
+  const [assetCategory,setAssetCategory] = useState(null)
+  const [assetType,setAssetType] = useState(null)
+  const [assetVendor,setAssetVendor] = useState(null)
+  const [assetModel,setAssetModel] = useState(null)
+  const [assetProject,setAssetProject] =useState(null)
+  const [assetPerson,setAssetPerson] = useState(null)
+
+  const [assetTypeList,setAssetTypeList] = useState(null)
+  const [assetVendorList,setAssetVendorList] = useState(null)
+  const [assetModelList,setAssetModelList] = useState(null)
+
 
   const [newItem,setNewItem] = useState({
     category:assetCategory,
@@ -44,19 +43,14 @@ function NewEntry() {
 })
 
   useEffect(()=>{
-    setCategoryOptoins(AssetCategory)
-    setAssetTypeOptoins(AssetType)
-    setVendorOptoins(AssetVendors)
-    setModelOptoins(AssetModels)
-    setPersonOptions(Persons)
-    setProjectsOptions(Projects)
-  },[assetCategory])
+  },[])
 
 
   const handleOnChange = (e)=>{
     switch(e.target.name){
       case 'category': {
                     setAssetCategory(e.target.value)
+                    setAssetTypeList(AssetType.filter(entry => entry.category === assetCategory))
                     setNewItem({...newItem, [e.target.name]:e.target.value})
                     break;
                   }
@@ -117,27 +111,30 @@ function NewEntry() {
             
             <div className='form-element category-container'>
             <label htmlFor='category'>Category</label>
-            <select name='category' onChange={(e) =>handleOnChange(e)} id='category'>
-              {categoryOptoins && categoryOptoins.map(entry => <option>{entry.name}</option>)}
+            <select name='category' onChange={(e) =>handleOnChange(e)} id='category' defaultValue={'DEFAULT'}>
+              <option value='DEFAULT'> -- asset category -- </option>
+              {AssetCategory && AssetCategory.map((entry,index) => <option key={index}>{entry.name}</option>)}
             </select>
             </div>
 
             <div className='form-element type-container'>
             <label htmlFor='type'>Type</label>
-            <select name='type' onChange={(e) =>handleOnChange(e)} id='type'>
-              {assetTypeOptoins && assetTypeOptoins.map(entry => {
+            <select name='type' onChange={(e) =>handleOnChange(e)} id='type' defaultValue={'DEFAULT'}>
+            <option value='DEFAULT'> -- asset type -- </option>
+              {AssetType && AssetType.map((entry,index) => {
                 if(entry.category === assetCategory)
-                return <option>{entry.name}</option>
+                return <option key={index}>{entry.name}</option>
               })}
             </select>
             </div>
 
             <div className='form-element vendor-container'>
             <label htmlFor='vendor'>Vendor</label>
-            <select name='vendor' onChange={(e) =>handleOnChange(e)} id='vendor'>
-            {vendorOptoins && vendorOptoins.map(entry =>{
+            <select name='vendor' onChange={(e) =>handleOnChange(e)} id='vendor' defaultValue={'DEFAULT'}>
+            <option value='DEFAULT'> -- asset vendor -- </option>
+            {AssetVendors && AssetVendors.map((entry,index) =>{
                 if(entry.category === assetCategory && entry.type === assetType){
-                 return <option>{entry.name}</option>
+                 return <option key={index}>{entry.name}</option>
                 }
               }
               )}
@@ -146,10 +143,11 @@ function NewEntry() {
 
             <div className='form-element model-container'>
             <label htmlFor='model'>Model</label>
-            <select name='model' onChange={(e) =>handleOnChange(e)} id='model'>
-            {modelOptoins && modelOptoins.map(entry =>{
+            <select name='model' onChange={(e) =>handleOnChange(e)} id='model' defaultValue={'DEFAULT'}>
+            <option value='DEFAULT'> -- asset model -- </option>
+            {AssetModels && AssetModels.map((entry,index) =>{
                 if(entry.category === assetCategory && entry.type === assetType && entry.vendor === assetVendor){
-                return <option>{entry.name}</option>
+                return <option key={index}>{entry.name}</option>
                 }
               }
               )}
@@ -168,10 +166,11 @@ function NewEntry() {
 
             <div className='form-element project-container'>
             <label htmlFor='project'>Project</label>
-            <select name='project' onChange={(e)=>handleOnChange(e)} id='project'>
-              {projectsOptions && projectsOptions.map(entry => {
+            <select name='project' onChange={(e)=>handleOnChange(e)} id='project' defaultValue={'DEFAULT'}>
+            <option value='DEFAULT'> -- project name -- </option>
+              {Projects && Projects.map((entry,index) => {
                 if(entry.category === assetCategory)
-                return <option>{entry.name}</option>
+                return <option key={index}>{entry.name}</option>
               })}
               
             </select>
@@ -184,26 +183,29 @@ function NewEntry() {
 
             
             <div className='form-element added-by-container'>
-            <label for='person'>Added by</label>
-            <select name='person' id='added-by' onChange={(e)=>handleOnChange(e)}>
-              <option>Person A</option>
-              <option>Person B</option>
+            <label htmlFor='person'>Added by</label>
+            <select name='person' id='added-by' onChange={(e)=>handleOnChange(e)} defaultValue={'DEFAULT'}>
+            <option value='DEFAULT'> -- person -- </option>
+              {Persons && Persons.map((entry,index) => {
+                if(entry.category === assetCategory)
+                return <option key={index}>{entry.name}</option>
+              })}
             </select>
             </div>
 
             <div className='form-element attachment-container'>
-              <label for='icon'>Add Image</label>
+              <label htmlFor='icon'>Add Image</label>
                 <input name='icon' type='file' id='icon' onChange={(e)=>handleOnFileChange(e)}></input>
             </div>
 
             <div className='form-element attachment-container'>
-              <label for='attach'>Attach file</label>
+              <label htmlFor='attach'>Attach file</label>
                 <input name='attach' type='file' id='attach' onChange={(e)=>handleOnFileChange(e)}></input>
             </div>
 
             
             <div className='form-element comments-container'>
-                <label for='comments'>Comments</label>
+                <label htmlFor='comments'>Comments</label>
                 <input name='comments' id='comments' type='text' onChange={(e)=>handleOnChange(e)} placeholder='Add comments'></input>
             </div>
 
