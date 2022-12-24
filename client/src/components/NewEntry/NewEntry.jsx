@@ -3,6 +3,9 @@ import './NewEntry.css'
 import { ListOfType } from '../../Data/ListOfType'
 import {useState, useEffect} from 'react'
 import {getFormData, submitNewEntry} from './../../utils/api.js'
+import {storage} from './../../utils/firebase.js'
+import {ref, uploadBytes, getDownloadURL, listAll} from 'firebase/storage'
+import {v4} from 'uuid'
 
 const {AssetCategory, AssetType, AssetVendors, AssetModels,Persons,Projects} = getFormData();
 
@@ -13,6 +16,9 @@ function NewEntry() {
   const [modelOptoins, setModelOptoins] = useState([])
   const [personsOptions,setPersonOptions] = useState([])
   const [projectsOptions,setProjectsOptions] = useState([])
+
+  const [iconFile, setIconFile] = useState(null)
+  const [docFile,setDocFile] = useState(null)
 
   const [assetCategory,setAssetCategory] = useState(AssetCategory[0].name)
   const [assetType,setAssetType] = useState((AssetType.find(entry => entry.category === assetCategory)).name)
@@ -46,22 +52,6 @@ function NewEntry() {
     setProjectsOptions(Projects)
   },[assetCategory])
 
-  // const handleCategoryChange = (e)=>{
-  //   setCategory(e.target.value)
-  //   setNewItem({...newItem, [e.target.name]:e.target.value})
-  // }
-  // const handleTypeChange = (e) =>{
-  //   setAssetType(e.target.value)
-  //   setNewItem({...newItem, [e.target.name]:e.target.value})
-  // }
-  // const handleVendorChange = (e) =>{
-  //   setVendor(e.target.value)
-  //   setNewItem({...newItem, [e.target.name]:e.target.value})
-  // }
-  // const handleModelChange = (e) =>{
-  //   setModel(e.target.value)
-  //   setNewItem({...newItem, [e.target.name]:e.target.value})
-  // }
 
   const handleOnChange = (e)=>{
     switch(e.target.name){
@@ -76,8 +66,8 @@ function NewEntry() {
                     break;
                   }    
       case 'vendor':{
-        setAssetVendor(e.target.value);
-        setNewItem({...newItem, [e.target.name]:e.target.value})
+                    setAssetVendor(e.target.value);
+                    setNewItem({...newItem, [e.target.name]:e.target.value})
         break;
       }
       case 'model':{
@@ -88,9 +78,31 @@ function NewEntry() {
       default: {
         setNewItem({...newItem, [e.target.name]:e.target.value})
       }
+    }    
+  }
+
+  const handleOnFileChange = (event)=>{
+    const input = event.target.name;
+    const inputFile = event.target.files[0]
+
+    if(inputFile == null){
+      return;
     }
 
-    
+    switch(input){
+      case 'icon':{
+        const iconRef = ref(storage, `/AssetIcons/${inputFile.name + v4()}`);
+        uploadBytes(iconRef,inputFile).then((snapshot)=>{
+          getDownloadURL(snapshot.ref).then(url => setNewItem({...newItem,icon:url}))
+        })
+      }
+      case 'attach':{
+        const docRef = ref(storage, `/AssetDocs/${inputFile.name + v4()}`);
+        uploadBytes(docRef,inputFile).then((snapshot)=>{
+          getDownloadURL(snapshot.ref).then(url => setNewItem({...newItem,attach:url}))
+        })
+      }
+    }
   }
 
   const handleSaveButton = ()=>{
@@ -106,14 +118,14 @@ function NewEntry() {
             <div className='form-element category-container'>
             <label htmlFor='category'>Category</label>
             <select name='category' onChange={(e) =>handleOnChange(e)} id='category'>
-              {categoryOptoins.map(entry => <option>{entry.name}</option>)}
+              {categoryOptoins && categoryOptoins.map(entry => <option>{entry.name}</option>)}
             </select>
             </div>
 
             <div className='form-element type-container'>
             <label htmlFor='type'>Type</label>
             <select name='type' onChange={(e) =>handleOnChange(e)} id='type'>
-              {assetTypeOptoins.map(entry => {
+              {assetTypeOptoins && assetTypeOptoins.map(entry => {
                 if(entry.category === assetCategory)
                 return <option>{entry.name}</option>
               })}
@@ -123,7 +135,7 @@ function NewEntry() {
             <div className='form-element vendor-container'>
             <label htmlFor='vendor'>Vendor</label>
             <select name='vendor' onChange={(e) =>handleOnChange(e)} id='vendor'>
-            {vendorOptoins.map(entry =>{
+            {vendorOptoins && vendorOptoins.map(entry =>{
                 if(entry.category === assetCategory && entry.type === assetType){
                  return <option>{entry.name}</option>
                 }
@@ -135,7 +147,7 @@ function NewEntry() {
             <div className='form-element model-container'>
             <label htmlFor='model'>Model</label>
             <select name='model' onChange={(e) =>handleOnChange(e)} id='model'>
-            {modelOptoins.map(entry =>{
+            {modelOptoins && modelOptoins.map(entry =>{
                 if(entry.category === assetCategory && entry.type === assetType && entry.vendor === assetVendor){
                 return <option>{entry.name}</option>
                 }
@@ -157,7 +169,7 @@ function NewEntry() {
             <div className='form-element project-container'>
             <label htmlFor='project'>Project</label>
             <select name='project' onChange={(e)=>handleOnChange(e)} id='project'>
-              {projectsOptions.map(entry => {
+              {projectsOptions && projectsOptions.map(entry => {
                 if(entry.category === assetCategory)
                 return <option>{entry.name}</option>
               })}
@@ -181,12 +193,12 @@ function NewEntry() {
 
             <div className='form-element attachment-container'>
               <label for='icon'>Add Image</label>
-                <input name='icon' type='file' id='icon' onChange={(e)=>handleOnChange(e)}></input>
+                <input name='icon' type='file' id='icon' onChange={(e)=>handleOnFileChange(e)}></input>
             </div>
 
             <div className='form-element attachment-container'>
               <label for='attach'>Attach file</label>
-                <input name='attach' type='file' id='attach' onChange={(e)=>handleOnChange(e)}></input>
+                <input name='attach' type='file' id='attach' onChange={(e)=>handleOnFileChange(e)}></input>
             </div>
 
             

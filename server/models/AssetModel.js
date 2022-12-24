@@ -51,7 +51,6 @@ const assetSchema = mongoose.Schema({
     },
     comments:{
         type: String,
-        required: true
     },
     status:{
         type: String,
@@ -59,6 +58,6 @@ const assetSchema = mongoose.Schema({
     }
 })
 
-const assetModel = mongoose.Model('asset',assetSchema)
+const assetModel = mongoose.model('Asset',assetSchema)
 
 export default assetModel;
