@@ -1,8 +1,19 @@
 import React from 'react'
 import './ListAll.css'
-import AllData from '../../SampleData/AllData'
+//import AllData from '../../SampleData/AllData'
+import {getAssetDetails} from './../../utils/api.js'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 function ListAll() {
+  const [AllData,SetAllData] = useState([])
+  const fetchData = async ()=>{
+    SetAllData(await getAssetDetails())
+  }
+  useEffect(()=>{
+    fetchData();
+    console.log(AllData)
+  },[])
   return (
     <div>
       <div className='searchbox-container'>
@@ -25,7 +36,7 @@ function ListAll() {
             </tr>
             </thead>
             <tbody>
-                {AllData.map((entry,index) => (
+                {AllData && AllData.map((entry,index) => (
                   <tr key={index}>
                     <td>{index+1}</td>
                     <td>{entry.name}</td>

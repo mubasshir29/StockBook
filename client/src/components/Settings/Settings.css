@@ -1,3 +1,9 @@
+.show{
+    visibility: visible;
+}
+.hidden{
+    visibility: hidden;
+}
 .tab-table{
     width: 100%;
 }
@@ -7,7 +13,7 @@
     width: 50%;
     margin: 30px auto 20px auto;
     background-color: rgb(64, 48, 95);
-    height: 300px;
+    height: 500px;
 }
 .left-panel{
     width: 30%;
@@ -54,8 +60,8 @@ label{
     margin: auto auto;
     display: flex;
     flex-direction: column;
-    /*gap: 15px;*/
-    justify-content: space-around;
+    gap: 15px;
+    /*justify-content: space-around;*/
 }
 
 .right-panel-upper div{

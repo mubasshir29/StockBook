@@ -1,14 +1,14 @@
 .form-container{
     width: 70%;
-    margin: 20px auto;
-    border: 0px solid white ;
+    margin: 10px auto 10px auto;
+    border: 3px solid rgba(255, 255, 255,30%) ;
     background-color: rgb(64, 48, 95);
     border-radius: 2rem;
     padding: 5px 0px;
 }
 h1{
     color: white;
-    margin-top: 50px;
+    margin-top: 15px;
 }
 .additem-form{
     display: flex;
@@ -21,7 +21,7 @@ h1{
 .form-element{
     color: white;
     padding: 5px 10px;
-    margin: 10px 0;
+    margin: 8px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -73,6 +73,9 @@ h1{
     width: 30%;
 }
 .description-container{
+    width: 98%;;
+}
+.name-container{
     width: 98%;;
 }
 .project-container{

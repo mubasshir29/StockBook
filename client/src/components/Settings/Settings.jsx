@@ -16,6 +16,8 @@ function Settings() {
     const [typeSelected,setTypeSelected] = useState(false)
     const [vendorSelected,setVendorSelected] = useState(false)
     const [modelSelected,setModelSelected] = useState(false)
+    const [projectSelected,setProjectSelected] = useState(false)
+    const [personSelected,setPersonSelected] = useState(false)
     const [activeLink,setActiveLink] = useState('category')
 
     const [newEntry,setNewEntry] = useState({})
@@ -26,6 +28,8 @@ function Settings() {
         setTypeSelected(false)
         setVendorSelected(false)
         setModelSelected(false)
+        setProjectSelected(false)
+        setPersonSelected(false)
     }
     const handleTypeClick = (e)=>{
         setActiveLink('type')
@@ -33,6 +37,8 @@ function Settings() {
         setTypeSelected(true)
         setVendorSelected(false)
         setModelSelected(false)
+        setProjectSelected(false)
+        setPersonSelected(false)
     }
     const handleVendorClick = (e)=>{
         setActiveLink('vendor')
@@ -40,6 +46,8 @@ function Settings() {
         setTypeSelected(true)
         setVendorSelected(true)
         setModelSelected(false)
+        setProjectSelected(false)
+        setPersonSelected(false)
     }
     const handleModelClick = (e)=>{
         setActiveLink('model')
@@ -47,32 +55,67 @@ function Settings() {
         setTypeSelected(true)
         setVendorSelected(true)
         setModelSelected(true)
+        setProjectSelected(false)
+        setPersonSelected(false)
+    }
+    const handleProjectClick = (e)=>{
+        setActiveLink('project')
+        setCategorySelected(true)
+        setTypeSelected(false)
+        setVendorSelected(false)
+        setModelSelected(false)
+        setProjectSelected(true)
+        setPersonSelected(false)
+    }
+    const handlePersonClick = (e)=>{
+        setActiveLink('person')
+        setCategorySelected(true)
+        setTypeSelected(false)
+        setVendorSelected(false)
+        setModelSelected(false)
+        setProjectSelected(false)
+        setPersonSelected(true)
     }
 
 
 
-    
+
     const handleInputChange = (e) => {
         setNewEntry({...newEntry,[e.target.name]: e.target.value})
         console.log(newEntry)
     }
-    const handleSaveButton = (e)=>{
+    const handleSaveButton = async (e)=>{
         e.preventDefault();
-        if(modelSelected && vendorSelected && typeSelected && categorySelected){
-            addNewModel(newEntry)
+        switch(activeLink){
+            case 'category':{
+                AssetCategory.push(newEntry)
+                console.log("Category Added")
+                addNewCategory(newEntry)
+                break;
+            }
+            case 'type':{
+                addNewType(newEntry)
+                break;
+            }
+            case 'vendor':{
+                addNewVendor(newEntry)
+                break;
+            }
+            case 'model':{
+                addNewModel(newEntry)
+                break;
+            }
+            case 'project':{
+                addNewProject(newEntry)
+                break;
+            }
+            case 'person':{
+                const res = await addNewPerson(newEntry)
+                if(res===200){window.alert("Person added successfully")}
+                break;
+            }
         }
-        else  if(vendorSelected && typeSelected && categorySelected){
-            addNewVendor(newEntry)
-        }
-        else  if(typeSelected && categorySelected){
-            addNewType(newEntry)
-        }
-        else if(categorySelected){
-            AssetCategory.push(newEntry)
-            console.log("Category Added")
-            console.log(AssetCategory)
-            addNewCategory(newEntry)
-        }
+
         document.querySelectorAll('input').values ='';
     }
 
@@ -85,8 +128,8 @@ function Settings() {
                 <li name='type' className={ activeLink==='type'? 'selected': ''} onClick={e=>handleTypeClick(e)}>New Type</li>
                 <li name='vendor' className={ activeLink==='vendor'? 'selected': ''} onClick={e=>handleVendorClick(e)}>New Vendor</li>
                 <li name='model' className={ activeLink==='model'? 'selected': ''} onClick={e=>handleModelClick(e)}>New Model</li>
-                <li name='model' className={ activeLink==='model'? 'selected': ''} onClick={e=>handleModelClick(e)}>New Project</li>
-                <li name='model' className={ activeLink==='model'? 'selected': ''} onClick={e=>handleModelClick(e)}>New Person</li>
+                <li name='project' className={ activeLink==='project'? 'selected': ''} onClick={e=>handleProjectClick(e)}>New Project</li>
+                <li name='person' className={ activeLink==='person'? 'selected': ''} onClick={e=>handlePersonClick(e)}>New Person</li>
             </ul>
         </div>
         <div className='right-panel'>
@@ -106,6 +149,14 @@ function Settings() {
                 {modelSelected && <div className='model-container'>
                     <label>Model</label><br/>
                     <input name='model' onChange={(e)=>handleInputChange(e)} type={'text'}></input>
+                </div>}
+                {projectSelected && <div className='model-container'>
+                    <label>Project</label><br/>
+                    <input name='project' onChange={(e)=>handleInputChange(e)} type={'text'}></input>
+                </div>}
+                {personSelected && <div className='model-container'>
+                    <label>Person</label><br/>
+                    <input name='person' onChange={(e)=>handleInputChange(e)} type={'text'}></input>
                 </div>}
             </div>
         </div>

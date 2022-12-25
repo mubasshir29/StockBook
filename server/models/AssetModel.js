@@ -1,6 +1,10 @@
 import mongoose from 'mongoose'
 
 const assetSchema = mongoose.Schema({
+    name:{
+        type: String,
+        required: true
+    },
     category:{
         type: String,
         required: true

@@ -1,7 +1,14 @@
-import assetModel from './../models/AssetModel.js'
+import assetModel from '../models/AssetModel.js'
 
-export const getAllAssets = (req,res)=>{
-    
+export const getAllAssets = async (req,res)=>{
+    try{
+        const allAssets = await assetModel.find()
+        res.status(200).json(allAssets)
+    }
+    catch(error){
+        console.log(error)
+    }
+
 }
 
 export const addNewEntry = async (req,res)=>{
@@ -16,5 +23,4 @@ export const addNewEntry = async (req,res)=>{
     catch(error){
         console.log("Error",error.message)
     }
-    
 }
