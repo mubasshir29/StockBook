@@ -1,10 +1,10 @@
-import React, { createContext, useEffect } from 'react'
+import React, { createContext, useEffect,useState } from 'react'
 import axios from 'axios'
-import {getFormData, submitNewEntry} from './../../utils/api.js'
+import {getFormData} from './api.js'
 
-function dataContext(props) {
-    const dataContext = createContext()
+const dataContext = createContext()
 
+function DataProvider(props) {
     const [AssetCategory,setAssetCategory] = useState(null)
     const [AssetType,setAssetType] = useState(null)
     const [AssetVendors,setAssetVendors] = useState(null)
@@ -20,15 +20,18 @@ function dataContext(props) {
         setAssetModels(models)
         setProjects(projects)
         setPersons(persons)
-    }
+      }
     useEffect(()=>{
-        fetchData();
+        fetchData()
+        setTimeout(()=>{
+            console.log("Waiting for data to fetch")
+        },2000)
     },[])
   return (
-    <dataContext.Provider value={{AssetCategory,AssetType,AssetVendors,AssetModels,Projects,Persons}}>
+    <dataContext.Provider value={{AssetCategory, AssetType, AssetVendors, AssetModels,Projects,Persons}}>
         {props.children}
     </dataContext.Provider>
   )
 }
 
-export default dataContext
+export {dataContext, DataProvider}

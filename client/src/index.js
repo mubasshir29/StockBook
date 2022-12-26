@@ -5,14 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import {CountContextProvider} from './utils/CountContext'
+import {DataProvider} from './utils/dataContext.js'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
     <BrowserRouter>
-    <CountContextProvider>
+    <DataProvider>
       <App />
-    </CountContextProvider>
+    </DataProvider>
     </BrowserRouter>
   
 );

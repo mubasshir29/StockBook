@@ -10,7 +10,7 @@ const backend_url = 'http://localhost:8000'
 
 export const getAssetDetails = async () =>{
     const detailList = await axios.get(backend_url)
-    console.log(detailList.data)
+    //console.log(detailList.data)
     return detailList.data;
 }
 

@@ -2,17 +2,20 @@ import React from 'react'
 import './ListAll.css'
 //import AllData from '../../SampleData/AllData'
 import {getAssetDetails} from './../../utils/api.js'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect,useState,useContext } from 'react'
+import { dataContext } from '../../utils/dataContext.js'
 
 function ListAll() {
+  const getData = useContext(dataContext)
+  if(getData){
+    console.log("received value",getData.AssetCategory)
+  }
   const [AllData,SetAllData] = useState([])
   const fetchData = async ()=>{
     SetAllData(await getAssetDetails())
   }
   useEffect(()=>{
     fetchData();
-    console.log(AllData)
   },[])
   return (
     <div>
