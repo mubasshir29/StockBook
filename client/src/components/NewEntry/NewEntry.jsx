@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createFactory } from 'react'
 import './NewEntry.css'
 import { ListOfType } from '../../Data/ListOfType'
 import {useState, useEffect} from 'react'
@@ -6,15 +6,25 @@ import {getFormData, submitNewEntry} from './../../utils/api.js'
 import {storage} from './../../utils/firebase.js'
 import {ref, uploadBytes, getDownloadURL, listAll} from 'firebase/storage'
 import {v4} from 'uuid'
+import { dataContext } from '../../utils/dataContext'
+import { useContext } from 'react'
 
 
 function NewEntry() {
-  const [AssetCategory,setAssetCategory] = useState(null)
-  const [AssetType,setAssetType] = useState(null)
-  const [AssetVendors,setAssetVendors] = useState(null)
-  const [AssetModels,setAssetModels] = useState(null)
-  const [Projects,setProjects] =useState(null)
-  const [Persons,setPersons] = useState(null)
+  const [AssetCategory, AssetType, AssetVendors, AssetModels,Projects,Persons] = useContext(dataContext)
+  // console.log("Received data: ",data.AssetCategory)
+  // const [AssetCategory,setAssetCategory] = useState(data.AssetCategory)
+  // const [AssetType,setAssetType] = useState(null)
+  // const [AssetVendors,setAssetVendors] = useState(null)
+  // const [AssetModels,setAssetModels] = useState(null)
+  // const [Persons,setPersons] = useState(null)
+  // const [Projects,setProjects] =useState(null)
+  
+
+  // console.log("Type: ",typeof(data))
+  // if(!AssetCategory){
+  //   console.log("AssetCategory:", AssetCategory)
+  // }
 
   const [selectedCategory,setSelectedCategory] = useState(null)
   const [selectedType,setSelectedType] = useState(null)
@@ -23,18 +33,24 @@ function NewEntry() {
   const [selectedProject,setSelectedProject] =useState(null)
   const [selectedPerson,setSelectedPerson] = useState(null)
 
-  const fetchData = async ()=>{
-    const [categories, types, vendors, models,persons,projects] = await getFormData();
-    setAssetCategory(categories)
-    setAssetType(types)
-    setAssetVendors(vendors)
-    setAssetModels(models)
-    setProjects(projects)
-    setPersons(persons)
-  }
+  // const fetchData = async ()=>{
+  //   setAssetCategory(categories)
+  //   setAssetType(types)
+  //   setAssetVendors(vendors)
+  //   setAssetModels(models)
+  //   setProjects(projects)
+  //   setPersons(persons)
+  // }
   useEffect(()=>{
-    //fetchData()
-    fetchData()
+    // //fetchData()
+    // //fetchData()
+    // setAssetCategory(data.AssetCategory)
+    // setAssetType(data.AssetType)
+    // setAssetVendors(data.AssetVendors)
+    // setAssetModels(data.AssetModels)
+    // setProjects(data.Projects)
+    // setPersons(data.Persons)
+    console.log("Received Categories: ",Projects)
   },[])
 
   const [iconFile, setIconFile] = useState(null)

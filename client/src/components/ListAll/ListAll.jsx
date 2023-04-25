@@ -6,10 +6,6 @@ import { useEffect,useState,useContext } from 'react'
 import { dataContext } from '../../utils/dataContext.js'
 
 function ListAll() {
-  const getData = useContext(dataContext)
-  if(getData){
-    console.log("received value",getData.AssetCategory)
-  }
   const [AllData,SetAllData] = useState([])
   const fetchData = async ()=>{
     SetAllData(await getAssetDetails())

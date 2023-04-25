@@ -23,12 +23,10 @@ function DataProvider(props) {
       }
     useEffect(()=>{
         fetchData()
-        setTimeout(()=>{
-            console.log("Waiting for data to fetch")
-        },2000)
+        
     },[])
   return (
-    <dataContext.Provider value={{AssetCategory, AssetType, AssetVendors, AssetModels,Projects,Persons}}>
+    <dataContext.Provider value={[AssetCategory, AssetType, AssetVendors, AssetModels,Projects,Persons]}>
         {props.children}
     </dataContext.Provider>
   )
